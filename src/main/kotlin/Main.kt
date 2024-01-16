@@ -2,13 +2,12 @@ import java.util.*
 
 fun main() {
     var intentos = 1
-    val frutas =
-        listOf("MANZANA", "PERA", "NARANJA", "HIGO", "COCO", "PIMIENTO", "LIMON", "MANGO", "UVA", "NUEZ", "AVELLANA")
+    val frutas = listOf("MANZANA", "PERA", "NARANJA", "HIGO", "COCO", "PIMIENTO", "LIMON", "MANGO", "UVA", "NUEZ", "AVELLANA")
     val rnds = (0 until frutas.size).random()
     val fruta = frutas[rnds]
     val numc = fruta.length
 
-    var guion = "_".repeat(numc).toCharArray()
+    val guion = "_".repeat(numc).toCharArray()
 
     var rm = ReproductorMidi("pugnodollari.mid")
     println("Cargando juego ...")
@@ -58,7 +57,7 @@ fun main() {
             break
         }
         //println(intentos)
-    } while (intentos < 8)
+    } while (true)
 
     if (intentos == 7) {
         println("¡Has perdido! La palabra era $fruta")
