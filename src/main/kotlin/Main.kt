@@ -54,14 +54,14 @@ fun main() {
 
         // comproba a palabra
         if (!guion.contains('_')) {
-            println("¡Felicidades! Has adivinado la palabra: $fruta")
+            println("¡Has ganado! La palabra era $fruta")
             break
         }
         //println(intentos)
     } while (intentos < 8)
 
-    if (intentos > 7) {
-        println("¡Lo siento! Has agotado todos tus intentos. La palabra era: $fruta")
+    if (intentos == 7) {
+        println("¡Has perdido! La palabra era $fruta")
     }
 
     rm.cerrar()
