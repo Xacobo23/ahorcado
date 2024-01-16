@@ -1,3 +1,5 @@
+import java.util.*
+
 fun main() {
     var intentos = 1
     val frutas =
@@ -6,16 +8,33 @@ fun main() {
     val fruta = frutas[rnds]
     val numc = fruta.length
 
-    // Inicializar la palabra oculta con guiones bajos
     var guion = "_".repeat(numc).toCharArray()
+
+    var rm = ReproductorMidi("pugnodollari.mid")
+    println("Cargando juego ...")
+    Thread.sleep(2000)
+
+    println("")
+    println("           _    _  ____  _____            _____          _____   ____  \n" +
+            "     /\\   | |  | |/ __ \\|  __ \\     /\\   / ____|   /\\   |  __ \\ / __ \\ \n" +
+            "    /  \\  | |__| | |  | | |__) |   /  \\ | |       /  \\  | |  | | |  | |\n" +
+            "   / /\\ \\ |  __  | |  | |  _  /   / /\\ \\| |      / /\\ \\ | |  | | |  | |\n" +
+            "  / ____ \\| |  | | |__| | | \\ \\  / ____ \\ |____ / ____ \\| |__| | |__| |\n" +
+            " /_/    \\_\\_|  |_|\\____/|_|  \\_\\/_/    \\_\\_____/_/    \\_\\_____/ \\____/ \n" +
+            "                                                                       \n" +
+            "                                                                      ")
+    Thread.sleep(5000)
 
     do {
         DibujoAhorcado.dibujar(intentos)
+        if(intentos == 7){
+            break
+        }
         println(guion.joinToString(" "))
         print("Ingresa una letra: ")
-        val caracter = readLine()?.toUpperCase()?.get(0)
+        val caracter = readLine()?.uppercase()?.get(0)
 
-        // Verificar si la letra ingresada está en la palabra
+        // comproba a palabra
         val aciertos = mutableListOf<Int>()
         for (i in 0 until numc) {
             if (fruta[i] == caracter) {
@@ -24,24 +43,29 @@ fun main() {
         }
 
         if (aciertos.isEmpty()) {
-            // Incrementar el número de intentos solo si la letra es incorrecta
+            // cambio o numero de intentos
             intentos++
         }
 
-        // Actualizar los guiones bajos con las letras correctas
+        // cambio os guions coas letras
         for (indice in aciertos) {
             guion[indice] = fruta[indice]
         }
 
-        // Verificar si se ha adivinado la palabra
+        // comproba a palabra
         if (!guion.contains('_')) {
             println("¡Felicidades! Has adivinado la palabra: $fruta")
             break
         }
-
+        //println(intentos)
     } while (intentos < 8)
 
-    if (intentos >= 8) {
+    if (intentos > 7) {
         println("¡Lo siento! Has agotado todos tus intentos. La palabra era: $fruta")
     }
+
+    rm.cerrar()
+    rm = ReproductorMidi("Individual_Drums__Crash_Cymbal.mid")
+    Thread.sleep(1000)
+    rm.cerrar()
 }
